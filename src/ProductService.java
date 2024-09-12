@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductService {
 	
@@ -50,7 +51,9 @@ public class ProductService {
 	public List<Product> getProductByWord(String name) {
 		// TODO Auto-generated method stub
 		String newname=name.toLowerCase();
+		
 		List<Product> getProductByWord = new ArrayList<>();
+		products.stream().filter(p->(p.getName().toLowerCase()).contains(newname)||(p.getType().toLowerCase()).contains(newname)||(p.getPlace().toLowerCase()).contains(newname)).map(e-> e).collect(Collectors.toList());
 			for(Product p:products)
 			{
 				if((p.getName().toLowerCase()).contains(newname)||(p.getType().toLowerCase()).contains(newname)||(p.getPlace().toLowerCase()).contains(newname))
@@ -58,7 +61,7 @@ public class ProductService {
 					getProductByWord.add(p);
 				}		
 			}
-			return getProductByWord;	
+			return products.stream().filter(p->(p.getName().toLowerCase()).contains(newname)||(p.getType().toLowerCase()).contains(newname)||(p.getPlace().toLowerCase()).contains(newname)).map(e-> e).collect(Collectors.toList());	
 			}
 	public void removeProduct(String name) {
 	    Iterator<Product> iterator = products.iterator();
